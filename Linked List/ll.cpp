@@ -11,13 +11,13 @@ public:
 
 class LinkedList{
 public:
-    void InsertAtHead(Node** head_ref, int data){
+    void insertAtHead(Node** head_ref, int data){
         Node* newNode = new Node(data);
         newNode->next = *head_ref;
         *head_ref = newNode;
     }
 
-    void InsertAtTail(Node** head_ref, int data){
+    void insertAtTail(Node** head_ref, int data){
         Node* newNode = new Node(data);
         if(*head_ref==NULL){
             *head_ref = newNode;
@@ -31,7 +31,7 @@ public:
         }
     }
 
-    void InsertSpecific(Node** head_ref, int data, int index){
+    void insertSpecific(Node** head_ref, int data, int index){
         Node* newNode = new Node(data);
         if(index==0){
             newNode->next = *head_ref;
@@ -46,7 +46,7 @@ public:
         current->next = newNode;
     }
 
-    void DeleteAtHead(Node** head_ref){
+    void deleteAtHead(Node** head_ref){
         if(*head_ref==NULL){
             cout<<"The list is empty. "<<endl;
             return;
@@ -57,7 +57,7 @@ public:
         current = NULL;
     }
 
-    void DeleteAtTail(Node** head_ref){
+    void deleteAtTail(Node** head_ref){
         if(*head_ref==NULL){
             cout<<"The list is empty. "<<endl;
             return;
@@ -75,7 +75,7 @@ public:
         current->next = NULL;
     }
 
-    void DeleteAtSpecific(Node** head_ref, int index){
+    void deleteAtSpecific(Node** head_ref, int index){
         if(*head_ref==NULL){
             cout<<"The list is empty. "<<endl;
             return;
@@ -97,7 +97,7 @@ public:
         current = NULL;
     }
 
-    void Print(Node* head){
+    void print(Node* head){
         if(head==NULL){
             return;
         }
@@ -108,21 +108,21 @@ public:
         cout<<"NULL"<<endl;
     }
 
-    void ReversePrint(Node* head) {
+    void reversePrint(Node* head) {
         if (head == nullptr) {
             std::cout << "NULL";
             return;
         }
-        ReversePrint(head->next);
+        reversePrint(head->next);
         std::cout << "<-" << head->data;
     }
 
-    void ReverseLL(Node** head_ref, Node* current) {
+    void reverseLL(Node** head_ref, Node* current) {
         if (current->next == NULL) {
             *head_ref = current;
             return;
         }
-        ReverseLL(head_ref, current->next);
+        reverseLL(head_ref, current->next);
         Node* temp = current->next;
         temp->next = current;
         current->next = NULL;
@@ -142,7 +142,7 @@ public:
     //     return getLen(head->next, count + 1)
     // }
 
-    void PrintMiddle(Node* head){
+    void printMiddle(Node* head){
         int len = getLen(head);
         int midIdx = len/2;
         for(int j = 0; j<midIdx; j++){
@@ -158,7 +158,7 @@ public:
         cout<<index<<"th Value Of Linked List is: "<<head->data<<endl;
     }
 
-    void DeleteList(Node* head){
+    void deleteList(Node* head){
         Node* prev = head;
         Node* current = head;
         while(current){
@@ -168,20 +168,31 @@ public:
         }
         cout<<"Linked list deleted"<<endl;
     }
-
+    void searchElement(Node* head, int x){
+        int i = 0;
+        while(head){
+            if(head->data==x){
+                cout<<x<<" is at "<<i<<"th position"<<endl;
+                return;
+            }
+            i++;
+            head = head->next;
+        }
+        cout<<"There is no "<<x<<" element in the linked list"<<endl;
+    }
 };
 
 int main(){
     Node* head = NULL;
     LinkedList* itemList = new LinkedList();
 
-    itemList->InsertAtHead(&head, 8);
-    itemList->InsertAtHead(&head, 4);
-    itemList->InsertAtTail(&head, 9);
-    itemList->InsertAtHead(&head, 3);
-    itemList->InsertSpecific(&head, 7, 1);
-    itemList->Print(head);
-    itemList->ReversePrint(head);
+    itemList->insertAtHead(&head, 8);
+    itemList->insertAtHead(&head, 4);
+    itemList->insertAtTail(&head, 9);
+    itemList->insertAtHead(&head, 3);
+    itemList->insertSpecific(&head, 7, 1);
+    itemList->print(head);
+    itemList->searchElement(head, 8);
 
     delete itemList;
     return 0;
