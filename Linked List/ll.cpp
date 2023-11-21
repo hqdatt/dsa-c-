@@ -48,7 +48,7 @@ public:
 
     void deleteAtHead(Node** head_ref){
         if(*head_ref==NULL){
-            cout<<"The list is empty. "<<endl;
+            cout << "The list is empty. " << endl;
             return;
         }
         Node* current = *head_ref;
@@ -59,7 +59,7 @@ public:
 
     void deleteAtTail(Node** head_ref){
         if(*head_ref==NULL){
-            cout<<"The list is empty. "<<endl;
+            cout << "The list is empty. " << endl;
             return;
         }
         if((*head_ref)->next==NULL){
@@ -77,7 +77,7 @@ public:
 
     void deleteAtSpecific(Node** head_ref, int index){
         if(*head_ref==NULL){
-            cout<<"The list is empty. "<<endl;
+            cout << "The list is empty. " << endl;
             return;
         }
         if(index==1){ 
@@ -102,19 +102,19 @@ public:
             return;
         }
         while(head!=NULL){
-            cout<<head->data<<"->";
+            cout << head->data << "->";
             head = head->next;
         }
-        cout<<"NULL"<<endl;
+        cout << "NULL" << endl;
     }
 
     void reversePrint(Node* head) {
         if (head == nullptr) {
-            std::cout << "NULL";
+            std::cout  <<  "NULL";
             return;
         }
         reversePrint(head->next);
-        std::cout << "<-" << head->data;
+        std::cout  <<  "<-"  <<  head->data;
     }
 
     void reverseLL(Node** head_ref, Node* current) {
@@ -148,14 +148,14 @@ public:
         for(int j = 0; j<midIdx; j++){
             head = head->next;
         }
-        cout<<"Middle Value Of Linked List is: "<<head->data<<endl;
+        cout << "Middle Value Of Linked List is: " << head->data << endl;
     }
 
     void PrintSpecific(Node* head, int index){
         for(int j = 0; j<index; j++){
             head = head->next;
         }
-        cout<<index<<"th Value Of Linked List is: "<<head->data<<endl;
+        cout << index << "th Value Of Linked List is: " << head->data << endl;
     }
 
     void deleteList(Node* head){
@@ -166,19 +166,32 @@ public:
             current = current->next;
             delete prev;
         }
-        cout<<"Linked list deleted"<<endl;
+        cout << "Linked list deleted" << endl;
     }
-    void searchElement(Node* head, int x){
-        int i = 0;
-        while(head){
-            if(head->data==x){
-                cout<<x<<" is at "<<i<<"th position"<<endl;
+    
+    void searchElement(Node* head, int key, int position = 0){
+        if(head){
+            if(head->data==key){
+                cout << key << " is at " << position <<  "th position" << endl;
                 return;
+            } else {
+                searchElement(head->next, key, position + 1);
             }
-            i++;
-            head = head->next;
+        } else {
+            cout << "There is no " << key << " element in the linked list" << endl;
         }
-        cout<<"There is no "<<x<<" element in the linked list"<<endl;
+    }
+
+    void countElement(Node* head, int key, int count = 0){
+        if(head){
+            if(head->data==key){
+                countElement(head->next, key, count + 1);
+            } else {
+                countElement(head->next, key, count);
+            }
+        } else {
+            cout << "Frequency of " << key << ": " << count <<endl;
+        }
     }
 };
 
@@ -191,8 +204,10 @@ int main(){
     itemList->insertAtTail(&head, 9);
     itemList->insertAtHead(&head, 3);
     itemList->insertSpecific(&head, 7, 1);
+    itemList->insertSpecific(&head, 4, 4);
     itemList->print(head);
     itemList->searchElement(head, 8);
+    itemList->countElement(head, 4);
 
     delete itemList;
     return 0;
