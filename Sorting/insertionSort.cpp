@@ -13,16 +13,9 @@ void printArray(int arr[], int size){
 
 void insertsionSort(int arr[], int size){
     for(int i = 0; i < size - 1; i++){
-        while (true){
-            if(arr[i+1]<arr[i]){
+        while (i>=0 && arr[i+1]<arr[i]){
                 swap(arr[i+1],arr[i]);
-                if(i>0){
-                    i--;
-                }
-            }
-            else{
-                break;
-            }
+                i--;
         }
     }
 }
